@@ -1,0 +1,51 @@
+# build manifest for sr.ht
+image: archlinux
+packages:
+ - gnupg
+ - gcc
+ - clang
+ - make
+ - python
+ - python-numpy
+sources:
+ - https://git.sr.ht/~quf/cnpy
+tasks:
+ - check-signature-if-on-master-branch: |
+    cd cnpy
+    gpg --import .builds/signing-keys.asc # Import keys
+    gpg --list-keys | grep '^    ' | sed 's/^ *//' | sed 's/$/:6:/' | gpg --import-ownertrust # Set trust to ultimate
+    if test $(git rev-parse HEAD) = $(git rev-parse master); then
+      git verify-commit HEAD # Every commit on master should be signed
+    fi
+ - build-examples-with-gcc: |
+    cd cnpy/examples
+    CC=gcc make
+    make clean
+ - build-examples-with-clang: |
+    cd cnpy/examples
+    CC=clang make
+    make clean
+ - run-misc-tests-gcc: |
+    cd cnpy/tests/misc
+    CC=gcc make
+    make clean
+ - run-misc-tests-clang: |
+    cd cnpy/tests/misc
+    CC=clang make
+    make clean
+ - build-fuzz-target-gcc: |
+    cd cnpy/tests/fuzz_me
+    CC=gcc make
+    make clean
+ - build-fuzz-target-clang: |
+    cd cnpy/tests/fuzz_me
+    CC=clang make
+    make clean
+ - run-generated-tests-gcc: |
+    cd cnpy/tests/generated
+    CC=gcc python3 generate_and_run.py
+    make clean
+ - run-generated-tests-clang: |
+    cd cnpy/tests/generated
+    CC=clang python3 generate_and_run.py
+    make clean
