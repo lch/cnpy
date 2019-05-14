@@ -16,6 +16,7 @@ Examples
 --------
 
 - Open an existing `.npy` file with 2 dimensions and complex entries, print the entries, and then change them (in memory only):
+
 ```
 #include <stdio.h>
 #include <stdlib.h>
@@ -56,6 +57,7 @@ int main(void) {
 ```
 
 - Create a new `.npy` file and save some data inside:
+
 ```
 #include <stdio.h>
 #include <stdlib.h>
