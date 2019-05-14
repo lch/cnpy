@@ -47,11 +47,9 @@ tasks:
  - run-generated-tests-gcc: |
     cd cnpy/tests/generated
     CC=gcc python3 generate_and_run.py
-    make clean
  - run-generated-tests-clang: |
     cd cnpy/tests/generated
     CC=clang python3 generate_and_run.py
-    make clean
  - update-man: |
     git clone man@man.sr.ht:~quf/cnpy man-cnpy
     cd man-cnpy
