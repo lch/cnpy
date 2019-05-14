@@ -9,6 +9,8 @@ Summary
 Files are always loaded with mmap(2), so they may be larger than main memory size; it also means that data is only copied to main memory as needed (if only a small number of entries is accessed, only a small amount is loaded into memory).
 The library performs no dynamic memory management except a single mmap per file; it never calls malloc(3).
 
+Build status: [![builds.sr.ht status](https://builds.sr.ht/~quf/cnpy.svg)](https://builds.sr.ht/~quf/cnpy?)
+
 
 Examples
 --------
@@ -91,7 +93,7 @@ int main(void) {
 }
 ```
 
-- For a more complex and example (where the data type and number of dimensions are not know in advance), see the file `examples/print_npy.c`, which prints the header and content of an `.npy` file in human-readable form.
+- For a more complex and example (where the data type and number of dimensions are not know in advance), see the file [`examples/print_npy.c`](https://git.sr.ht/~quf/cnpy/tree/master/examples/print_npy.c), which prints the header and content of an `.npy` file in human-readable form.
 
 
 Standards and Compatibility
@@ -145,7 +147,7 @@ As an example, opening an uncached file with 10^9 doubles, adding all elements, 
 Versions
 --------
 
-`cnpy.h` versioning follows semanting versioning v2.0.0.
+`cnpy.h` versioning follows [semanting versioning v2.0.0](https://semver.org/).
 
 The current project version is 1.0.0 (the initial public version).
 
