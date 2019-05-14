@@ -2,6 +2,15 @@ import pathlib
 import numpy
 import os
 import subprocess
+import sys
+
+if len(sys.argv) == 2 and sys.argv[1] == "fast" or len(sys.argv) == 1:
+        shapes = [(1,), (2,), (3,), (1, 1), (2, 3), (2, 3, 5), (2, 3, 5, 7)]
+elif len(sys.argv) == 2 and sys.argv[1] == "slow":
+        shapes = [(1,), (2,), (3,), (12094,), (1, 1), (1, 2), (2, 2), (2, 3), (3, 3), (53, 661), (1, 1, 1), (1, 1, 2), (1, 2, 3), (2, 2, 2), (2, 3, 5), (3, 3, 3), (1, 1, 1, 1), (1, 1, 1, 2), (1, 1, 2, 3), (1, 2, 3, 5), (2, 2, 2, 2), (2, 3, 5, 7), (5, 7, 11, 13)]
+else:
+    print(f"Usage: {sys.argv[0]} [fast|slow]", file=sys.stderr)
+    exit(1)
 
 cc_args = [os.environ.get("CC", default="cc"), "-W", "-Wall", "-Werror", "-Wfatal-errors", "-Wno-unused-function", "-I../../include/", "-lm"]
 if os.uname().sysname != "OpenBSD":
@@ -78,7 +87,7 @@ for dtype in "?", "i1", "i2", "i4", "i8", "u1", "u2", "u4", "u8", "f4", "f8", "c
     else:
         byte_orders = ("<", ">")
     for byte_order in byte_orders:
-        for shape in (1,), (3,), (12094,), (1, 2), (2, 2), (2, 3), (3, 3), (53, 661), (1, 1, 2), (1, 2, 3), (2, 2, 2), (2, 3, 5), (3, 3, 3), (1, 1, 1, 2), (1, 1, 2, 3), (1, 2, 3, 5), (2, 2, 2, 2), (2, 3, 5, 7), (5, 7, 11, 13):
+        for shape in shapes:
             if is_effectively_1d(shape):
                 orders = "c",
             else:
