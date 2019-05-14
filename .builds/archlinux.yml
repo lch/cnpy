@@ -9,6 +9,9 @@ packages:
  - python-numpy
 sources:
  - https://git.sr.ht/~quf/cnpy
+secrets:
+ - d32fc40b-86f6-421f-9a90-daef61450045 # builds.sr.ht secret SSH key
+ - 72dc0367-f4d6-4f0b-9670-c1bdfc7e5a1b # .ssh/known_hosts
 tasks:
  - check-signature-if-on-master-branch: |
     cd cnpy
@@ -49,3 +52,14 @@ tasks:
     cd cnpy/tests/generated
     CC=clang python3 generate_and_run.py
     make clean
+ - update-man: |
+    git clone man@man.sr.ht:~quf/cnpy man-cnpy
+    cd man-cnpy
+    cp ../cnpy/readme.md index.md
+    git add .
+    if test ! -z "$(git status --porcelain)"; then
+      git config --local user.name "builds.sr.ht"
+      git config --local user.email "none@none.invalid"
+      git commit -m "auto-update index.md"
+      git push
+    fi
