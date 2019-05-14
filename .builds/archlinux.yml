@@ -34,11 +34,11 @@ tasks:
     CC=clang make
     make clean
  - build-fuzz-target-gcc: |
-    cd cnpy/tests/fuzz_me
+    cd cnpy/tests/fuzz
     CC=gcc make
     make clean
  - build-fuzz-target-clang: |
-    cd cnpy/tests/fuzz_me
+    cd cnpy/tests/fuzz
     CC=clang make
     make clean
  - run-generated-tests-gcc: |
