@@ -183,6 +183,7 @@ Supported data types
 --------------------
 
 Supported data types:
+
  - Boolean values
  - Signed integers (sizes 1, 2, 4, 8 bytes)
  - Unsigned integers (sizes 1, 2, 4, 8 bytes)
@@ -362,6 +363,7 @@ Developer info
 This section is intended for people who want to change the library, not for people who merely need to use it in their own program.
 
 Conventions:
+
 - "magic string" refers to the 6-byte string "\x93NUMPY" at the beginning of each npy file.
 - "preheader" refers to the first 10 or 12 bytes at the beginning of each npy file (including the magic string, the 2 byte version, and the 2 or 4 byte header size)
 - "header" refers to the python dictionary with keys "descr", "fortran_order", and "shape" (including padding and excluding the preheader)
