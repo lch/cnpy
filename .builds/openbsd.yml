@@ -1,0 +1,34 @@
+# build manifest for sr.ht
+image: openbsd/6.5
+packages:
+ - gnupg%gnupg2
+ - python%3
+ - py3-numpy
+sources:
+ - https://git.sr.ht/~quf/cnpy
+tasks:
+ - git-config: |
+    cd cnpy
+    git config --local gpg.program /usr/local/bin/gpg2
+ - check-signature-if-on-master-branch: |
+    cd cnpy
+    gpg2 --import .builds/signing-keys.asc # Import keys
+    gpg2 --list-keys | grep '^    ' | sed 's/^ *//' | sed 's/$/:6:/' | gpg2 --import-ownertrust # Set trust to ultimate
+    if test $(git rev-parse HEAD) = $(git rev-parse master); then
+      git verify-commit HEAD # Every commit on master should be signed
+    fi
+ - build-examples: |
+    cd cnpy/examples
+    make
+    make clean
+ - run-misc-tests: |
+    cd cnpy/tests/misc
+    make
+    make clean
+ - build-fuzz-target: |
+    cd cnpy/tests/fuzz
+    make
+    make clean
+ - run-generated-tests: |
+    cd cnpy/tests/generated
+    python3 generate_and_run.py
