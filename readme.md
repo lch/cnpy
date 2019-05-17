@@ -151,7 +151,7 @@ Versions
 
 `cnpy.h` versioning follows [semanting versioning v2.0.0](https://semver.org/).
 
-The current project version is 1.0.1.
+The current project version is 1.0.2.
 
 
 Thread-safety
@@ -330,8 +330,9 @@ They should not be used directly.
 Changelist
 ----------
 
-- 1.0.1 Changes from 1.0.0:
+- 1.0.2 Changes from 1.0.0:
   - Some typos fixed in readme.md
+  - Fixed a bug which rejected technically valid files
 
 
 License
