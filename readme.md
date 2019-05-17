@@ -330,7 +330,6 @@ They should not be used directly.
 Changelist
 ----------
 
-There have been no changes since version 1.0.0.
 - 1.0.1 Changes from 1.0.0:
   - Some typos fixed in readme.md
 
