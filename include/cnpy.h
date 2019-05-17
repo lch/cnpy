@@ -440,19 +440,13 @@ static cnpy_status cnpy_parse_header(cnpy_parser_state *s) {
   }
 
   /* parse padding spaces and a final '\n' */
-  while (s->pos < s->full_header_size && s->raw_data[s->pos] == ' ') {
-    s->pos += 1;
-  }
-
-  if (s->pos < s->full_header_size && s->raw_data[s->pos] == '\n') {
-    s->pos += 1;
-  }
-  else {
-    return cnpy_error(CNPY_ERROR_FORMAT, "Missing \\n at end of header");
-  }
+  cnpy_parse_skip_whitespace(s);
 
   if (s->pos != s->full_header_size) {
-    return cnpy_error(CNPY_ERROR_FORMAT, "header ended prematurely at position %zu (reported end is %zu)", s->pos, s->full_header_size);
+    return cnpy_error(CNPY_ERROR_FORMAT, "junk after end of header dictionary at position %zu (reported end is %zu)", s->pos, s->full_header_size);
+  }
+  if (s->raw_data[s->full_header_size - 1] != '\n') {
+    return cnpy_error(CNPY_ERROR_FORMAT, "Missing \\n at end of header");
   }
 
   return CNPY_SUCCESS;
