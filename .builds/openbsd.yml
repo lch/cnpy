@@ -10,13 +10,6 @@ tasks:
  - git-config: |
     cd cnpy
     git config --local gpg.program /usr/local/bin/gpg2
- - check-signature-if-on-master-branch: |
-    cd cnpy
-    gpg2 --import .builds/signing-keys.asc # Import keys
-    gpg2 --list-keys | grep '^    ' | sed 's/^ *//' | sed 's/$/:6:/' | gpg2 --import-ownertrust # Set trust to ultimate
-    if test $(git rev-parse HEAD) = $(git rev-parse master); then
-      git verify-commit HEAD # Every commit on master should be signed
-    fi
  - build-examples: |
     cd cnpy/examples
     make
