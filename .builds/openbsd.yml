@@ -1,5 +1,5 @@
 # build manifest for sr.ht
-image: openbsd/6.5
+image: openbsd/6.7
 packages:
  - gnupg%gnupg2
  - python%3
