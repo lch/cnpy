@@ -95,7 +95,7 @@ int main(void) {
 }
 ```
 
-- For a more complex example (where the data type and number of dimensions are not know in advance), see the file [`examples/print_npy.c`](https://git.sr.ht/~quf/cnpy/tree/master/examples/print_npy.c), which prints the header and content of an `.npy` file in human-readable form.
+- For a more complex example (where the data type and number of dimensions are not know in advance), see the file [`examples/print_npy.c`](https://git.sr.ht/~quf/cnpy/tree/trunk/examples/print_npy.c), which prints the header and content of an `.npy` file in human-readable form.
 
 
 Standards and Compatibility
