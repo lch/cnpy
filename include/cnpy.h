@@ -963,7 +963,7 @@ cnpy_status cnpy_create(const char * const fn, cnpy_byte_order byte_order, cnpy_
   /* Open the file (if necessary) */
   int fd = -1;
   if (fn != NULL) {
-    fd = open(fn, O_RDWR | O_CREAT | O_EXCL, (mode_t) 0644);
+    fd = open(fn, O_RDWR | O_CREAT | O_TRUNC, (mode_t) 0644);
     if (fd == -1) {
       return cnpy_error(CNPY_ERROR_FILE, "Could not open file: %s", strerror(errno));
     }
